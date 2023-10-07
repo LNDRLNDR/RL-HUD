@@ -1,488 +1,481 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description"
-        content="Rocket League Esports Overlay HUD: Enhancing Viewer Experience and Attract Sponsors">
-  <meta name="keywords" content="Rocket League, Esports, Overlay, Broadcasting, HUD">
-  <meta name="author" content="LNDRLNDRLNDR">
-  <title>Rocket League Esports Overlay HUD</title>
-  <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+          content="Rocket League Esports Overlay HUD: Enhancing Viewer Experience and Attract Sponsors">
+    <meta name="keywords" content="Rocket League, Esports, Overlay, Broadcasting, HUD">
+    <meta name="author" content="LNDRLNDRLNDR">
+    <title>Rocket League Esports Overlay HUD</title>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <!-- Add your preferred favicon link here -->
-  <link rel="icon" href="icon.png">
-  <link rel="apple-touch-icon" href="icon.png"/>
+    <!-- Add your preferred favicon link here -->
+    <link rel="icon" href="icon.png">
+    <link rel="apple-touch-icon" href="icon.png"/>
 
-  <style>
-    html, body {
-      height: 100%;
-      width: 100%;
-      background: transparent;
-      font-family: 'Montserrat', sans-serif;
-      color: #1e1e1e;
-      margin: 0;
-    }
+    <style>
+        html, body {
+            height: 100%;
+            width: 100%;
+            background: transparent;
+            font-family: 'Montserrat', sans-serif;
+            color: #1e1e1e;
+            margin: 0;
+        }
 
-    html {
-      background: #f5f5f5;
-      margin: 0;
-    }
+        html {
+            background: #f5f5f5;
+            margin: 0;
+        }
 
-    body {
-    <!-- padding-left: 50 px;
-    --> <!-- padding-right: 50 px;
-    --> display: flex;
-      flex-flow: column;
+        body {
+        <!-- padding-left: 50 px;
+        --> <!-- padding-right: 50 px;
+        --> display: flex;
+            flex-flow: column;
 
-    }
+        }
 
-    main {
-      width: min(90%, 700px);
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-
-    h1 {
-      font-weight: 900;
-      margin-bottom: 0;
-      font-size: 36px;
-    }
-
-    h2 {
-      font-size: 30px;
-    }
-
-    h3 {
-      font-size: 24px;
-    }
-
-    header {
-      display: flex;
-      flex-flow: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    .video_box iframe {
-      width: min(90%, 560px);
-      height: 315px;
-    }
-
-    .video_box {
-      margin-top: 35px;
-      margin-bottom: 35px;
-      display: flex;
-      justify-content: start;
-      align-items: start;
-      flex-flow: column;
-    }
-
-    iframe {
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .custom-btn {
-      /*background-color: #f44336;*/
-      position: relative;
-      left: 50%;
-      transform: translateX(-50%);
-      margin-bottom: 35px;
-    }
-
-    .discord-svg {
-      margin-right: 15px;
-      width: 25px;
-      height: 25px;
-      margin-top: auto;
-      margin-bottom: auto;
-    }
-
-    #scroll-to-top {
-      position: fixed;
-      bottom: 1rem;
-      right: 1rem;
-      opacity: 0;
-      transition: opacity 0.3s ease-in-out;
-    }
-
-    #scroll-to-top.show {
-      opacity: 1;
-    }
-
-    header, footer {
-      width: 100%;            
-      background-color: #1e1e1e;
-      color: white;
-      font-size: 22px;
-    }
-
-    footer ul li {
-      color: white;
-      font-size: 20px;
-      margin-left: 15px;
-    }
-
-    footer ul li a {
-      color: white;
-      text-decoration: underline;
-    }
-
-    header ul, footer {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      row-gap: 30px;
-    }
-
-    header li {
-      padding-left: 25px;
-      padding-right: 25px;
-      height: 40px;
-    }
-
-    header li a {
-      display: block;
-      /*padding: 14px 25px 10px 25px;*/
-      text-transform: uppercase;
-      color: #6696fe !important;
-      text-decoration: none !important;
-      font-size: 24px;
-      /*margin: 20px;*/
-      font-weight: 300;
-      transition: all .25s;
-      border-bottom: 3px solid transparent;
-    }
-
-    header li.active a {
-      display: block;
-      /*padding: 14px 25px 10px 25px;*/
-      text-transform: uppercase;
-      color: #f44336 !important;
-      text-decoration: none !important;
-      font-size: 24px;
-      /*margin: 20px;*/
-      font-weight: 300;
-      transition: all .25s;
-      border-bottom: 3px solid #f44336;
-    }
-
-    header li a:hover {
-      display: block;
-      /*padding: 14px 25px 10px 25px;*/
-      text-transform: uppercase;
-      color: #f8982d !important;
-      text-decoration: none !important;
-      font-size: 24px;
-      /*margin: 20px;*/
-      font-weight: 300;
-      transition: all .25s;
-      border-bottom: 3px solid #f8982d;
-    }
+        main {
+            width: min(90%, 700px);
+            margin-left: auto;
+            margin-right: auto;
+        }
 
 
-    .discord-btn {
-      background-color: #7289DA;
-      margin-top: 15px;
-      display: flex;
-      margin-left: auto;
-      margin-right: auto;
-      outline: 1px solid yellow;
-    }
+        h1 {
+            font-weight: 900;
+            margin-bottom: 0;
+            font-size: 36px;
+        }
 
-  </style>
+        h2 {
+            font-size: 30px;
+        }
+
+        h3 {
+            font-size: 24px;
+        }
+
+        header {
+            display: flex;
+            flex-flow: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .video_box iframe {
+            width: min(90%, 560px);
+            height: 315px;
+        }
+
+        .video_box {
+            margin-top: 35px;
+            margin-bottom: 35px;
+            display: flex;
+            justify-content: start;
+            align-items: start;
+            flex-flow: column;
+        }
+
+        iframe {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .custom-btn {
+            /*background-color: #f44336;*/
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            margin-bottom: 35px;
+        }
+
+        .discord-svg {
+            margin-right: 15px;
+            width: 25px;
+            height: 25px;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+
+        #scroll-to-top {
+            position: fixed;
+            bottom: 1rem;
+            right: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        #scroll-to-top.show {
+            opacity: 1;
+        }
+
+        header, footer {
+            width: 100%;
+            background-color: #1e1e1e;
+            color: white;
+            font-size: 22px;
+        }
+
+        footer ul li {
+            color: white;
+            font-size: 20px;
+            margin-left: 15px;
+        }
+
+        footer ul li a {
+            color: white;
+            text-decoration: underline;
+        }
+
+        header ul, footer {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            row-gap: 30px;
+        }
+
+        header li {
+            padding-left: 25px;
+            padding-right: 25px;
+            height: 40px;
+        }
+
+        header li a {
+            display: block;
+            /*padding: 14px 25px 10px 25px;*/
+            text-transform: uppercase;
+            color: #6696fe !important;
+            text-decoration: none !important;
+            font-size: 24px;
+            /*margin: 20px;*/
+            font-weight: 300;
+            transition: all .25s;
+            border-bottom: 3px solid transparent;
+        }
+
+        header li.active a {
+            display: block;
+            /*padding: 14px 25px 10px 25px;*/
+            text-transform: uppercase;
+            color: #f44336 !important;
+            text-decoration: none !important;
+            font-size: 24px;
+            /*margin: 20px;*/
+            font-weight: 300;
+            transition: all .25s;
+            border-bottom: 3px solid #f44336;
+        }
+
+        header li a:hover {
+            display: block;
+            /*padding: 14px 25px 10px 25px;*/
+            text-transform: uppercase;
+            color: #f8982d !important;
+            text-decoration: none !important;
+            font-size: 24px;
+            /*margin: 20px;*/
+            font-weight: 300;
+            transition: all .25s;
+            border-bottom: 3px solid #f8982d;
+        }
+
+
+        .discord-btn {
+            background-color: #7289DA;
+            margin-top: 15px;
+            display: flex;
+            margin-left: auto;
+            margin-right: auto;
+            outline: 1px solid yellow;
+        }
+
+    </style>
 </head>
 <body>
 <header>
-  <ul>
-    <li title="CARL: Analysis Tool for Rocket League">
-      <a href="https://lndrlndr.github.io/">CARL</a>
-    </li>
-    <li title="BARL: Broadcast Assistant for Rocket League">
-      <a href="https://lndrlndr.github.io/BARL-Overlay/">BARL</a>
-    </li>
-
-    <li class="active" title="Overlay Portfolio">
-      <a href="https://lndrlndr.github.io/portfolio/">OVERLAYS</a>
-    </li>
+    <ul>
+        <li title="CARL: Analysis Tool for Rocket League">
+            <a href="https://lndrlndr.github.io/">CARL</a>
+        </li>
+        <li title="BARL: Broadcast Assistant for Rocket League">
+            <a href="https://lndrlndr.github.io/BARL-Overlay/">BARL</a>
+        </li>
 
 
-    <li title="Home"><a href="https://lndrlndr.github.io/lndrlndrlndr">
-      <img style="height: 50px; width: 50px; border-radius: 50%; transform: translateY(-5px)"
-           alt="LNDRLNDRLNDR" src="https://lndrlndr.github.io/lndrlndrlndr/icon.png"/> </a>
-    </li>
+        <li title="Home"><a href="https://lndrlndr.github.io/lndrlndrlndr">
+            <img style="height: 50px; width: 50px; border-radius: 50%; transform: translateY(-5px)"
+                 alt="LNDRLNDRLNDR" src="https://lndrlndr.github.io/lndrlndrlndr/icon.png"/> </a>
+        </li>
 
-    <!--        <li><a href="https://lndrlndr.github.io/overlays/">CLIENTS</a></li>-->
-    <li title="Check out my Twitter">
-      <a target="_blank" href="https://x.com/LNDRLNDRLNDR">TWITTER</a>
-    </li>
-    <li title="Send me an Email">
-      <a target="_blank" href="mailto:lndr.overlays@gmail.com">EMAIL</a>
-    </li>
-    <li title="Join the BARL Discord server">
-      <a target="_blank" href="https://discord.gg/qF5FkJxNdR">DISCORD</a>
-    </li>
-  </ul>
+        <li class="active" title="Custom Overlays">
+            <a href="https://lndrlndr.github.io/portfolio/">OVERLAYS</a>
+        </li>
+
+        <li title="Check out my contact information">
+            <a href="https://lndrlndr.github.io/Contact/">CONTACT</a>
+        </li>
+    </ul>
 </header>
 
 <header style="background-color:#2f2f2f;">
-  <ul>
-    <li title="Dynamic Overlays Portfolio">
-      <a href="https://lndrlndr.github.io/portfolio">PORTFOLIO</a>
-    </li>
-    <li title="Dynamic Overlays Clients">
-      <a href="https://lndrlndr.github.io/overlays">CLIENTS</a>
-    </li>
-    <li class="active" title="Dynamic Overlays More Information">
-      <a href="https://lndrlndr.github.io/RL-HUD/">INFO</a>
-    </li>
-  </ul>
+    <ul>
+        <li title="Dynamic Overlays Portfolio">
+            <a href="https://lndrlndr.github.io/portfolio">PORTFOLIO</a>
+        </li>
+        <li title="Dynamic Overlays Clients">
+            <a href="https://lndrlndr.github.io/overlays">CLIENTS</a>
+        </li>
+        <li class="active" title="Dynamic Overlays More Information">
+            <a href="https://lndrlndr.github.io/RL-HUD/">INFO</a>
+        </li>
+    </ul>
 </header>
 
 <main>
-  <h1>Rocket League Esports Broadcast Overlay HUD</h1>
-  <section>
-    <h2>Introduction to Rocket League Esports Overlays</h2>
-    <p>In the realm of esports broadcasting, overlays are essential tools that enhance the viewing experience for
-      both spectators and sponsors...</p>
-  </section>
+    <h1>Rocket League Esports Broadcast Overlay HUD</h1>
+    <section>
+        <h2>Introduction to Rocket League Esports Overlays</h2>
+        <p>In the realm of esports broadcasting, overlays are essential tools that enhance the viewing experience for
+            both spectators and sponsors...</p>
+    </section>
 
 
-  <div class="video_box">
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/T_GBebE8DJE?autoplay=1"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen></iframe>
-  </div>
-
-  <section>
-    <h2>Why Use Overlays in Rocket League Esports Streams?</h2>
-    <p>1. Enhanced Viewer Experience: Overlays serve as an additional layer of information, enriching the viewer's
-      understanding of the game...</p>
-    <p>2. Professionalism: Overlays give Rocket League esports broadcasts a polished and professional look...</p>
-    <p>3. Branding and Sponsorship Opportunities: Overlays offer prime real estate for sponsors to showcase their
-      brands...</p>
-  </section>
-
-  <section>
-    <h2>Types of Overlays in RL Esports</h2>
-    <ul>
-      <li>Scoreboard Overlays: These overlays display the current score, game timer, and other relevant match
-        statistics...
-      </li>
-      <li>Team Roster Overlays: Team rosters with player names, pictures, and roles can be displayed...</li>
-      <li>Casting Overlays: These overlays typically include elements like a camera view of the casters,
-        commentary team information...
-      </li>
-      <li>Minimap Overlays: A minimap overlay provides a top-down view of the game field...</li>
-      <li>Custom HUDs: Customized heads-up displays can be created to offer unique visual experiences during
-        broadcasts...
-      </li>
-      <li>Animated Overlays: Adding animations to overlays can make the viewing experience more dynamic and
-        visually appealing...
-      </li>
-    </ul>
-  </section>
-
-  <section>
-    <div class="overlay-section">
-      <h2>Revolutionize Your Rocket League Esports Broadcasts with Full Dynamic Overlays</h2>
-      <p>When it comes to creating an unforgettable viewing experience for your Rocket League esports audience,
-        nothing quite matches the impact of Full Dynamic Overlays.</p>
-      <p>We're here to transform your broadcasts, replacing the standard HUD with meticulously crafted components
-        that seamlessly align with your brand. Our overlays are not just visually stunning; they're incredibly
-        user-friendly, allowing you to focus on what truly matters: the heart-pounding gameplay.</p>
-
-      <div class="video_box">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/Gz1cC9BpshQ"
+    <div class="video_box">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/T_GBebE8DJE?autoplay=1"
                 title="YouTube video player"
                 frameborder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 allowfullscreen></iframe>
-      </div>
+    </div>
 
-      <div class="overlay-features">
-        <h3>Possible Overlays & Screens:</h3>
+    <section>
+        <h2>Why Use Overlays in Rocket League Esports Streams?</h2>
+        <p>1. Enhanced Viewer Experience: Overlays serve as an additional layer of information, enriching the viewer's
+            understanding of the game...</p>
+        <p>2. Professionalism: Overlays give Rocket League esports broadcasts a polished and professional look...</p>
+        <p>3. Branding and Sponsorship Opportunities: Overlays offer prime real estate for sponsors to showcase their
+            brands...</p>
+    </section>
+
+    <section>
+        <h2>Types of Overlays in RL Esports</h2>
         <ul>
-          <li>Full real-time updatable game HUD</li>
-          <li>Game overlay with team boost boxes</li>
-          <li>Goal scored overlay (including Mini-Map)</li>
-          <li>Post game statistics screen (detailed player & team stats)</li>
-          <li>Game & match result screen</li>
-          <li>Game/Series MVP screen</li>
-          <li>Series statistics screen</li>
-          <li>Caster screen(s) (equipped with predictions)</li>
-          <li>Intermission screen (featuring a countdown timer)</li>
-          <li>Team comparison screen</li>
-          <li>Next up screen with team rosters</li>
-          <li>And much more!</li>
+            <li>Scoreboard Overlays: These overlays display the current score, game timer, and other relevant match
+                statistics...
+            </li>
+            <li>Team Roster Overlays: Team rosters with player names, pictures, and roles can be displayed...</li>
+            <li>Casting Overlays: These overlays typically include elements like a camera view of the casters,
+                commentary team information...
+            </li>
+            <li>Minimap Overlays: A minimap overlay provides a top-down view of the game field...</li>
+            <li>Custom HUDs: Customized heads-up displays can be created to offer unique visual experiences during
+                broadcasts...
+            </li>
+            <li>Animated Overlays: Adding animations to overlays can make the viewing experience more dynamic and
+                visually appealing...
+            </li>
         </ul>
-      </div>
+    </section>
 
-      <div class="overlay-extras">
-        <h3>Extra Features That Set Us Apart:</h3>
-        <ul>
-          <li>Seamless integration with a database for rapid team preset loading</li>
-          <li>Engaging transitions and animations between screens</li>
-          <li>Effortless customization of team colors</li>
-          <li>Highly flexible and customizable sponsor branding opportunities</li>
-          <li>Inclusion of player/team (web)cams for a more immersive experience</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+    <section>
+        <div class="overlay-section">
+            <h2>Revolutionize Your Rocket League Esports Broadcasts with Full Dynamic Overlays</h2>
+            <p>When it comes to creating an unforgettable viewing experience for your Rocket League esports audience,
+                nothing quite matches the impact of Full Dynamic Overlays.</p>
+            <p>We're here to transform your broadcasts, replacing the standard HUD with meticulously crafted components
+                that seamlessly align with your brand. Our overlays are not just visually stunning; they're incredibly
+                user-friendly, allowing you to focus on what truly matters: the heart-pounding gameplay.</p>
 
-  <section>
-    <div class="overlay-conclusion">
-      <h2>Transform Your Rocket League Esports Broadcasts Today</h2>
-      <p>Full Dynamic Overlays are your ticket to creating captivating and professional Rocket League esports
-        broadcasts. Elevate your viewers' experience, engage sponsors, and showcase your unique brand with our powerful
-        overlay solutions.</p>
-      <p>Ready to take your Rocket League broadcasts to the next level? Join our community of esports enthusiasts on
-        Discord for exclusive updates, discussions, and support:</p>
+            <div class="video_box">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/Gz1cC9BpshQ"
+                        title="YouTube video player"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen></iframe>
+            </div>
 
-      <!-- Discord Invite Link -->
-      <div class="video_box">
-        <a href="https://discord.gg/KgP3PDDfRx" target="_blank"
-           class="waves-effect waves-light btn discord-btn btn-large"
-           rel="nofollow">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="discord-svg" viewBox="0 0 16 16">
-            <path
-              d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/>
-          </svg>
-          <div>Join the Discord</div>
-        </a>
-      </div>
+            <div class="overlay-features">
+                <h3>Possible Overlays & Screens:</h3>
+                <ul>
+                    <li>Full real-time updatable game HUD</li>
+                    <li>Game overlay with team boost boxes</li>
+                    <li>Goal scored overlay (including Mini-Map)</li>
+                    <li>Post game statistics screen (detailed player & team stats)</li>
+                    <li>Game & match result screen</li>
+                    <li>Game/Series MVP screen</li>
+                    <li>Series statistics screen</li>
+                    <li>Caster screen(s) (equipped with predictions)</li>
+                    <li>Intermission screen (featuring a countdown timer)</li>
+                    <li>Team comparison screen</li>
+                    <li>Next up screen with team rosters</li>
+                    <li>And much more!</li>
+                </ul>
+            </div>
 
-      <p>Don't miss out on this opportunity to revolutionize your RL esports broadcasts. Connect with us today and let's
-        unlock the full potential of your Rocket League streaming experience.</p>
-    </div>
-  </section>
+            <div class="overlay-extras">
+                <h3>Extra Features That Set Us Apart:</h3>
+                <ul>
+                    <li>Seamless integration with a database for rapid team preset loading</li>
+                    <li>Engaging transitions and animations between screens</li>
+                    <li>Effortless customization of team colors</li>
+                    <li>Highly flexible and customizable sponsor branding opportunities</li>
+                    <li>Inclusion of player/team (web)cams for a more immersive experience</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-  <section>
-    <div class="overlay-streaming">
-      <h2>Unlock Seamless Streaming Excellence with Full Dynamic Overlays</h2>
-      <p>If you're an esports enthusiast, content creator, or a tournament organizer, your streaming setup should be
-        nothing short of extraordinary. That's where Full Dynamic Overlays come into play.</p>
-      <p>Our state-of-the-art overlay software is tailor-made for streamers on platforms like OBS, Twitch, YouTube, and
-        beyond. It's the must-have tool that transforms your Rocket League broadcasts from ordinary to
-        extraordinary.</p>
+    <section>
+        <div class="overlay-conclusion">
+            <h2>Transform Your Rocket League Esports Broadcasts Today</h2>
+            <p>Full Dynamic Overlays are your ticket to creating captivating and professional Rocket League esports
+                broadcasts. Elevate your viewers' experience, engage sponsors, and showcase your unique brand with our powerful
+                overlay solutions.</p>
+            <p>Ready to take your Rocket League broadcasts to the next level? Join our community of esports enthusiasts on
+                Discord for exclusive updates, discussions, and support:</p>
 
-      <h3>What Makes Full Dynamic Overlays for RL a Game-Changer?</h3>
-      <p>Imagine real-time, fully customizable overlays at your fingertips.</p>
-      <p>But it's not just about the RL overlays; it's about enhancing your streaming experience. Our software
-        seamlessly integrates with OBS, making setup a breeze. Stream to Twitch, YouTube, or your platform of choice
-        while captivating your audience with our professional-grade overlays.</p>
+            <!-- Discord Invite Link -->
+            <div class="video_box">
+                <a href="https://discord.gg/KgP3PDDfRx" target="_blank"
+                   class="waves-effect waves-light btn discord-btn btn-large"
+                   rel="nofollow">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="discord-svg" viewBox="0 0 16 16">
+                        <path
+                                d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z"/>
+                    </svg>
+                    <div>Join the Discord</div>
+                </a>
+            </div>
 
-      <h3>Why Full Dynamic Overlays Are a Must-Have for Streamers:</h3>
-      <p>Viewers are drawn to visually stunning broadcasts, and sponsors love the exposure.</p>
+            <p>Don't miss out on this opportunity to revolutionize your RL esports broadcasts. Connect with us today and let's
+                unlock the full potential of your Rocket League streaming experience.</p>
+        </div>
+    </section>
 
-      <p>Don't just stream Rocket League; elevate it. Experience the future of esports streaming with Full Dynamic
-        Overlays. Join the ranks of top-tier streamers who have made it an essential part of their toolkit.</p>
-      <p>Your audience deserves the best, and so do you. Try Full Dynamic Overlays today and let your Rocket League
-        broadcasts shine like never before!</p>
-    </div>
-  </section>
+    <section>
+        <div class="overlay-streaming">
+            <h2>Unlock Seamless Streaming Excellence with Full Dynamic Overlays</h2>
+            <p>If you're an esports enthusiast, content creator, or a tournament organizer, your streaming setup should be
+                nothing short of extraordinary. That's where Full Dynamic Overlays come into play.</p>
+            <p>Our state-of-the-art overlay software is tailor-made for streamers on platforms like OBS, Twitch, YouTube, and
+                beyond. It's the must-have tool that transforms your Rocket League broadcasts from ordinary to
+                extraordinary.</p>
 
-  <section>
-    <div class="overlay-customization">
-      <h2>Tailored to Your Brand: Unleash Customization Possibilities</h2>
-      <p>Full Dynamic Overlays aren't just about functionality; they're about reflecting your unique style and brand
-        identity. Our software offers unmatched customization options to ensure your broadcasts stand out from the
-        crowd.</p>
-      <p>With Full Dynamic Overlays, you can:</p>
-      <ul>
-        <li>Choose from a wide range of themes, color schemes, and designs</li>
-        <li>Add your logo and team branding elements seamlessly</li>
-        <li>Create a one-of-a-kind viewing experience for your audience</li>
-        <li>Modify fonts, graphics, and animations to match your vision</li>
-      </ul>
-      <p>Your stream, your rules. Elevate your brand and captivate your viewers with a personalized overlay
-        experience.</p>
-    </div>
-  </section>
+            <h3>What Makes Full Dynamic Overlays for RL a Game-Changer?</h3>
+            <p>Imagine real-time, fully customizable overlays at your fingertips.</p>
+            <p>But it's not just about the RL overlays; it's about enhancing your streaming experience. Our software
+                seamlessly integrates with OBS, making setup a breeze. Stream to Twitch, YouTube, or your platform of choice
+                while captivating your audience with our professional-grade overlays.</p>
 
-  <section>
-    <div class="overlay-solutions">
-      <h2>🏎️ What I Can Do 🏎️</h2>
-      <p>Imagine having the power to bring any aspect of your Rocket League broadcast to life. With our Full Dynamic
-        Overlays, your options are limitless, ensuring your broadcasts are as dynamic and engaging as your gameplay.</p>
-      <p>Here's just a glimpse of what our overlays can do:</p>
-      <ul>
-        <li>Main overlay featuring selected player cards & BoostMeter</li>
-        <li>Goal scored overlay for those electrifying moments</li>
-        <li>Post-game statistics overlay for in-depth analysis</li>
-        <li>Automatic transitions between overlays with stingers and animations</li>
-        <li>Dynamic support for all game modes: 1v1, 2v2, 3v3, 4v4</li>
-        <li>Easy editing of team names, logos, colors, and more via the Control Panel with Database integration</li>
-        <li>Automatic series tracker, accommodating Best of 1 up to 11</li>
-        <!-- Add more features as needed -->
-      </ul>
-      <p>Your imagination sets the boundaries; we're here to make it happen.</p>
-    </div>
-  </section>
+            <h3>Why Full Dynamic Overlays Are a Must-Have for Streamers:</h3>
+            <p>Viewers are drawn to visually stunning broadcasts, and sponsors love the exposure.</p>
 
-  <section>
-    <div class="overlay-affordability">
-      <h2>💰 About the Dynamic Overlays 💰</h2>
-      <p>We believe in making quality accessible to everyone. That's why our Full Dynamic Overlays come at a negotiable
-        and affordable price point. We can tailor an overlay to fit any budget, ensuring that you get the features you
-        need without breaking the bank.</p>
-      <p>Our pricing philosophy:</p>
-      <ul>
-        <li>Upgrade path for future enhancements</li>
-        <li>Local operation for ultra-low latency and full control</li>
-        <li>No need for additional paid software, just a one-time cost</li>
-        <li>User-friendly, with automation and comprehensive documentation</li>
-        <li>No need for your own designs, reducing overlay costs</li>
-      </ul>
-      <p>Your journey to outstanding broadcasts doesn't have to be expensive. We're committed to delivering value
-        without compromise.</p>
-    </div>
-  </section>
+            <p>Don't just stream Rocket League; elevate it. Experience the future of esports streaming with Full Dynamic
+                Overlays. Join the ranks of top-tier streamers who have made it an essential part of their toolkit.</p>
+            <p>Your audience deserves the best, and so do you. Try Full Dynamic Overlays today and let your Rocket League
+                broadcasts shine like never before!</p>
+        </div>
+    </section>
 
-  <section>
-    <div class="overlay-process">
-      <h2>👷 The Process 👷</h2>
-      <p>At Full Dynamic Overlays, we believe in making the overlay creation process efficient and transparent. Our
-        streamlined approach ensures that you get exactly what you want, down to the finest detail.</p>
-      <p>Here's how it works:</p>
-      <ul>
-        <li>We discuss your desired features and design requirements</li>
-        <li>You'll receive regular preview images and clips for feedback</li>
-        <li>Overlay development continues until you're 100% satisfied</li>
-      </ul>
-      <p>Your vision becomes reality, and your overlay is only considered complete when it meets your exact
-        specifications. We pride ourselves on delivering a hassle-free experience from start to finish.</p>
-    </div>
-  </section>
+    <section>
+        <div class="overlay-customization">
+            <h2>Tailored to Your Brand: Unleash Customization Possibilities</h2>
+            <p>Full Dynamic Overlays aren't just about functionality; they're about reflecting your unique style and brand
+                identity. Our software offers unmatched customization options to ensure your broadcasts stand out from the
+                crowd.</p>
+            <p>With Full Dynamic Overlays, you can:</p>
+            <ul>
+                <li>Choose from a wide range of themes, color schemes, and designs</li>
+                <li>Add your logo and team branding elements seamlessly</li>
+                <li>Create a one-of-a-kind viewing experience for your audience</li>
+                <li>Modify fonts, graphics, and animations to match your vision</li>
+            </ul>
+            <p>Your stream, your rules. Elevate your brand and captivate your viewers with a personalized overlay
+                experience.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="overlay-solutions">
+            <h2>🏎️ What I Can Do 🏎️</h2>
+            <p>Imagine having the power to bring any aspect of your Rocket League broadcast to life. With our Full Dynamic
+                Overlays, your options are limitless, ensuring your broadcasts are as dynamic and engaging as your gameplay.</p>
+            <p>Here's just a glimpse of what our overlays can do:</p>
+            <ul>
+                <li>Main overlay featuring selected player cards & BoostMeter</li>
+                <li>Goal scored overlay for those electrifying moments</li>
+                <li>Post-game statistics overlay for in-depth analysis</li>
+                <li>Automatic transitions between overlays with stingers and animations</li>
+                <li>Dynamic support for all game modes: 1v1, 2v2, 3v3, 4v4</li>
+                <li>Easy editing of team names, logos, colors, and more via the Control Panel with Database integration</li>
+                <li>Automatic series tracker, accommodating Best of 1 up to 11</li>
+                <!-- Add more features as needed -->
+            </ul>
+            <p>Your imagination sets the boundaries; we're here to make it happen.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="overlay-affordability">
+            <h2>💰 About the Dynamic Overlays 💰</h2>
+            <p>We believe in making quality accessible to everyone. That's why our Full Dynamic Overlays come at a negotiable
+                and affordable price point. We can tailor an overlay to fit any budget, ensuring that you get the features you
+                need without breaking the bank.</p>
+            <p>Our pricing philosophy:</p>
+            <ul>
+                <li>Upgrade path for future enhancements</li>
+                <li>Local operation for ultra-low latency and full control</li>
+                <li>No need for additional paid software, just a one-time cost</li>
+                <li>User-friendly, with automation and comprehensive documentation</li>
+                <li>No need for your own designs, reducing overlay costs</li>
+            </ul>
+            <p>Your journey to outstanding broadcasts doesn't have to be expensive. We're committed to delivering value
+                without compromise.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="overlay-process">
+            <h2>👷 The Process 👷</h2>
+            <p>At Full Dynamic Overlays, we believe in making the overlay creation process efficient and transparent. Our
+                streamlined approach ensures that you get exactly what you want, down to the finest detail.</p>
+            <p>Here's how it works:</p>
+            <ul>
+                <li>We discuss your desired features and design requirements</li>
+                <li>You'll receive regular preview images and clips for feedback</li>
+                <li>Overlay development continues until you're 100% satisfied</li>
+            </ul>
+            <p>Your vision becomes reality, and your overlay is only considered complete when it meets your exact
+                specifications. We pride ourselves on delivering a hassle-free experience from start to finish.</p>
+        </div>
+    </section>
 
 
-  <a id="scroll-to-top" href="#" class="btn-floating btn-large waves-effect waves-light red">
-    <i class="material-icons">arrow_upward</i>
-  </a>
+    <a id="scroll-to-top" href="#" class="btn-floating btn-large waves-effect waves-light red">
+        <i class="material-icons">arrow_upward</i>
+    </a>
 
 </main>
 <footer>
-  <ul style="color: white">
-    Contact:
-    <li title="Follow me on Twitter">
-      Twitter: <a target="_blank" href="https://x.com/LNDRLNDRLNDR">@LNDRLNDRLNDR</a>
-    </li>
-    <li title="Send me an Email">
-      Email: <a target="_blank" href="mailto:lndr.overlays@gmail.com">lndr.overlays@gmail.com</a>
-    </li>
-    <li title="Talk to me on Discord">
-      Discord: <a target="_blank" href="https://discord.gg/qF5FkJxNdR">lndrlndrlndr</a>
-    </li>
-  </ul>
+    <ul style="color: white">
+        Contact:
+        <li title="Follow me on Twitter">
+            Twitter: <a target="_blank" href="https://x.com/LNDRLNDRLNDR">@LNDRLNDRLNDR</a>
+        </li>
+        <li title="Send me an Email">
+            Email: <a target="_blank" href="mailto:lndr.overlays@gmail.com">lndr.overlays@gmail.com</a>
+        </li>
+        <li title="Talk to me on Discord">
+            Discord: <a target="_blank" href="https://discord.gg/qF5FkJxNdR">lndrlndrlndr</a>
+        </li>
+    </ul>
 </footer>
 </body>
 <script>

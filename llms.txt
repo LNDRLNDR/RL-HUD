@@ -1,0 +1,17 @@
+# Rocket League Esports Broadcast Overlay HUD
+
+> Educational resource explaining what Rocket League esports broadcasting overlays are, why they're used, what types exist, and what Full Dynamic Overlays from LNDRLNDRLNDR include. Aimed at streamers, tournament organizers, and esports content creators on OBS, Twitch, YouTube, and similar platforms.
+
+## Content
+
+- [Overlay Info Page](https://lndrlndr.github.io/RL-HUD/): Overview of overlay types, use cases, and customization options
+- [Why Use Overlays](https://lndrlndr.github.io/RL-HUD/): Enhanced viewer experience, professionalism, and sponsor branding
+- [Types of Overlays](https://lndrlndr.github.io/RL-HUD/): Scoreboard, team roster, casting screen, minimap, custom HUD, animated overlays
+- [Available Screens](https://lndrlndr.github.io/RL-HUD/): Full real-time HUD, game overlay with boost boxes, goal overlay with minimap, post-game stats, win/series result, MVP screen, series stats, caster screen with predictions, intermission screen, team comparison, next-up screen
+
+## Optional
+
+- [Portfolio](https://lndrlndr.github.io/portfolio/): Visual portfolio of completed overlay projects
+- [RLCS Team Overlays](https://lndrlndr.github.io/RLCS-Overlay/): Overlays made for professional RLCS teams
+- [Client Testimonials](https://lndrlndr.github.io/overlays/): What clients say about working with LNDRLNDRLNDR
+- [Contact](https://lndrlndr.github.io/Contact/): Commission a custom overlay
